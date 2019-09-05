@@ -1,0 +1,1386 @@
+/* SPDX-License-Identifier: BSD-2-Clause */
+/*******************************************************************************
+ * Copyright (c) 2019, Intel Corporation
+ * All rights reserved.
+ *******************************************************************************/
+
+#define TSS2_API_VERSION_1_2_1_108
+%include "tss2/tss2_common.h"
+%include "tss2/tss2_tpm2_types.h"
+
+%{
+#include <tss2/tss2_rc.h>
+%}
+extern const char *Tss2_RC_Decode(TSS2_RC rc);
+
+%include "cmalloc.i"
+%include "cpointer.i"
+%include "carrays.i"
+
+/* TODO For some reason this doesn't work if we name it TPMI_YES_NO */
+%pointer_functions(TPMI_YES_NO, TPMI_YES_NO_PTR);
+
+/* Gernate the following with:
+ * $ grep -E '} .*;' $(pkg-config --cflags-only-I tss2-esys | sed -e 's/-I//g')/tss2/tss2_tpm2_types.h | sed -e 's/} //g' -e 's/;//g' | sed -e 's#.*#%sizeof(&);\n%pointer_functions(&, &_PTR);\n%pointer_functions(& *, &_PTR_PTR);#g' > tpm2_pyesys/swig/tpm2_structures.i
+ */
+/* BEGIN GENERATED POINTER_CLASSES */
+%include "tpm2_structures.i"
+/* END   GENERATED POINTER_CLASSES */
+
+%include "stdint.i"
+
+typedef uint8_t             UINT8;
+typedef uint8_t             BYTE;
+typedef int8_t              INT8;
+typedef int                 BOOL;
+typedef uint16_t            UINT16;
+typedef int16_t             INT16;
+typedef uint32_t            UINT32;
+typedef int32_t             INT32;
+typedef uint64_t            UINT64;
+typedef int64_t             INT64;
+
+%pointer_functions(UINT8, UINT8_PTR);
+%pointer_functions(UINT8 *, UINT8_PTR_PTR);
+
+%pointer_class(uint32_t, uint32_t_PTR);
+%pointer_functions(uint32_t_PTR, uint32_t_PTR_PTR);
+%pointer_class(UINT32, UINT32_PTR);
+%pointer_functions(UINT32_PTR, UINT32_PTR_PTR);
+%pointer_class(uint16_t, uint16_t_PTR);
+%pointer_functions(uint16_t_PTR, uint16_t_PTR_PTR);
+%pointer_class(UINT16, UINT16_PTR);
+%pointer_functions(UINT16_PTR, UINT16_PTR_PTR);
+%array_class(BYTE, ByteArray);
+
+#define TSS2_TCTI_TIMEOUT_BLOCK    -1
+#define TSS2_TCTI_TIMEOUT_NONE     0
+
+%sizeof(TPMU_HA);
+
+#define ESYS_TR_NONE     0xfffU
+#define ESYS_TR_PASSWORD 0x0ffU
+#define ESYS_TR_PCR0      0U
+#define ESYS_TR_PCR1      1U
+#define ESYS_TR_PCR2      2U
+#define ESYS_TR_PCR3      3U
+#define ESYS_TR_PCR4      4U
+#define ESYS_TR_PCR5      5U
+#define ESYS_TR_PCR6      6U
+#define ESYS_TR_PCR7      7U
+#define ESYS_TR_PCR8      8U
+#define ESYS_TR_PCR9      9U
+#define ESYS_TR_PCR10    10U
+#define ESYS_TR_PCR11    11U
+#define ESYS_TR_PCR12    12U
+#define ESYS_TR_PCR13    13U
+#define ESYS_TR_PCR14    14U
+#define ESYS_TR_PCR15    15U
+#define ESYS_TR_PCR16    16U
+#define ESYS_TR_PCR17    17U
+#define ESYS_TR_PCR18    18U
+#define ESYS_TR_PCR19    19U
+#define ESYS_TR_PCR20    20U
+#define ESYS_TR_PCR21    21U
+#define ESYS_TR_PCR22    22U
+#define ESYS_TR_PCR23    23U
+#define ESYS_TR_PCR24    24U
+#define ESYS_TR_PCR25    25U
+#define ESYS_TR_PCR26    26U
+#define ESYS_TR_PCR27    27U
+#define ESYS_TR_PCR28    28U
+#define ESYS_TR_PCR29    29U
+#define ESYS_TR_PCR30    30U
+#define ESYS_TR_PCR31    31U
+
+#define ESYS_TR_RH_OWNER       0x101U
+#define ESYS_TR_RH_NULL        0x107U
+#define ESYS_TR_RH_LOCKOUT     0x10AU
+#define ESYS_TR_RH_ENDORSEMENT 0x10BU
+#define ESYS_TR_RH_PLATFORM    0x10CU
+#define ESYS_TR_RH_PLATFORM_NV 0x10DU
+#define ESYS_TR_RH_AUTH_FIRST  0x110U
+#define ESYS_TR_RH_AUTH(x) (ESYS_TR_RH_AUTH_FIRST + (ESYS_TR)(x))
+#define ESYS_TR_MIN_OBJECT 0x1000U
+#define ESYS_TR unsigned int
+
+%inline %{
+typedef TPM2B_DIGEST TPM2B_NONCE;
+typedef TPM2B_DIGEST TPM2B_AUTH;
+typedef TPM2B_DIGEST TPM2B_OPERAND;
+typedef TPM2B_DIGEST TPM2B_TIMEOUT;
+typedef UINT16 TPM2_ALG_ID;
+typedef UINT16 TPM2_ECC_CURVE;
+typedef UINT32 TPM2_CC;
+typedef UINT32 TPM2_ALGORITHM_ID;
+typedef UINT32 TPM2_MODIFIER_INDICATOR;
+typedef UINT32 TPM2_AUTHORIZATION_SIZE;
+typedef UINT32 TPM2_PARAMETER_SIZE;
+typedef UINT16 TPM2_KEY_SIZE;
+typedef UINT16 TPM2_KEY_BITS;
+typedef UINT32 TPM2_SPEC;
+typedef UINT32 TPM2_GENERATED;
+typedef UINT32 TPM2_RC;
+typedef INT8 TPM2_CLOCK_ADJUST;
+typedef UINT16 TPM2_EO;
+typedef UINT16 TPM2_ST;
+typedef UINT16 TPM2_SU;
+typedef UINT8 TPM2_SE;
+typedef UINT32 TPM2_CAP;
+typedef UINT32 TPM2_PT;
+typedef UINT32 TPM2_PT_PCR;
+typedef UINT32 TPM2_PS;
+typedef UINT32 TPM2_HANDLE;
+typedef UINT8 TPM2_HT;
+typedef TPM2_HANDLE TPM2_RH;
+typedef TPM2_HANDLE TPM2_HC;
+typedef uint32_t TPMA_ALGORITHM;
+typedef uint32_t TPMA_OBJECT;
+typedef UINT8 TPMA_SESSION;
+typedef UINT8 TPMA_LOCALITY;
+typedef uint32_t TPMA_PERMANENT;
+typedef uint32_t TPMA_STARTUP_CLEAR;
+typedef uint32_t TPMA_MEMORY;
+typedef uint32_t TPMA_CC;
+typedef uint32_t TPMA_MODES;
+typedef BYTE TPMI_YES_NO;
+typedef TPM2_HANDLE TPMI_DH_OBJECT;
+typedef TPM2_HANDLE TPMI_DH_PERSISTENT;
+typedef TPM2_HANDLE TPMI_DH_ENTITY;
+typedef TPM2_HANDLE TPMI_DH_PCR;
+typedef TPM2_HANDLE TPMI_SH_AUTH_SESSION;
+typedef TPM2_HANDLE TPMI_SH_HMAC;
+typedef TPM2_HANDLE TPMI_SH_POLICY;
+typedef TPM2_HANDLE TPMI_DH_CONTEXT;
+typedef TPM2_HANDLE TPMI_RH_HIERARCHY;
+typedef TPM2_HANDLE TPMI_RH_ENABLES;
+typedef TPM2_HANDLE TPMI_RH_HIERARCHY_AUTH;
+typedef TPM2_HANDLE TPMI_RH_PLATFORM;
+typedef TPM2_HANDLE TPMI_RH_OWNER;
+typedef TPM2_HANDLE TPMI_RH_ENDORSEMENT;
+typedef TPM2_HANDLE TPMI_RH_PROVISION;
+typedef TPM2_HANDLE TPMI_RH_CLEAR;
+typedef TPM2_HANDLE TPMI_RH_NV_AUTH;
+typedef TPM2_HANDLE TPMI_RH_LOCKOUT;
+typedef TPM2_HANDLE TPMI_RH_NV_INDEX;
+typedef TPM2_ALG_ID TPMI_ALG_HASH;
+typedef TPM2_ALG_ID TPMI_ALG_ASYM;
+typedef TPM2_ALG_ID TPMI_ALG_SYM;
+typedef TPM2_ALG_ID TPMI_ALG_SYM_OBJECT;
+typedef TPM2_ALG_ID TPMI_ALG_SYM_MODE;
+typedef TPM2_ALG_ID TPMI_ALG_KDF;
+typedef TPM2_ALG_ID TPMI_ALG_SIG_SCHEME;
+typedef TPM2_ALG_ID TPMI_ECC_KEY_EXCHANGE;
+typedef TPM2_ST TPMI_ST_COMMAND_TAG;
+typedef TPM2_ST TPMI_ST_ATTEST;
+typedef TPM2_KEY_BITS TPMI_AES_KEY_BITS;
+typedef TPM2_KEY_BITS TPMI_SM4_KEY_BITS;
+typedef TPM2_KEY_BITS TPMI_TPM2_CAMELLIA_KEY_BITS;
+typedef TPM2_ALG_ID TPMI_ALG_KEYEDHASH_SCHEME;
+typedef TPMS_SCHEME_HASH TPMS_SCHEME_HMAC;
+typedef TPMS_SCHEME_HASH TPMS_SIG_SCHEME_RSASSA;
+typedef TPMS_SCHEME_HASH TPMS_SIG_SCHEME_RSAPSS;
+typedef TPMS_SCHEME_HASH  TPMS_SIG_SCHEME_ECDSA;
+typedef TPMS_SCHEME_HASH  TPMS_SIG_SCHEME_SM2;
+typedef TPMS_SCHEME_HASH  TPMS_SIG_SCHEME_ECSCHNORR;
+typedef TPMS_SCHEME_ECDAA TPMS_SIG_SCHEME_ECDAA;
+typedef TPMS_SCHEME_HASH TPMS_ENC_SCHEME_OAEP;
+typedef TPMS_EMPTY TPMS_ENC_SCHEME_RSAES;
+typedef TPMS_SCHEME_HASH TPMS_KEY_SCHEME_ECDH;
+typedef TPMS_SCHEME_HASH TPMS_KEY_SCHEME_ECMQV;
+typedef TPMS_SCHEME_HASH TPMS_SCHEME_MGF1;
+typedef TPMS_SCHEME_HASH TPMS_SCHEME_KDF1_SP800_56A;
+typedef TPMS_SCHEME_HASH TPMS_SCHEME_KDF2;
+typedef TPMS_SCHEME_HASH TPMS_SCHEME_KDF1_SP800_108;
+typedef TPM2_ALG_ID TPMI_ALG_ASYM_SCHEME;
+typedef TPM2_ALG_ID TPMI_ALG_RSA_SCHEME;
+typedef TPM2_ALG_ID TPMI_ALG_RSA_DECRYPT;
+typedef TPM2_KEY_BITS TPMI_RSA_KEY_BITS;
+typedef TPM2_ALG_ID TPMI_ALG_ECC_SCHEME;
+typedef TPM2_ECC_CURVE TPMI_ECC_CURVE;
+typedef TPMS_SIGNATURE_RSA TPMS_SIGNATURE_RSASSA;
+typedef TPMS_SIGNATURE_RSA TPMS_SIGNATURE_RSAPSS;
+typedef TPMS_SIGNATURE_ECC TPMS_SIGNATURE_ECDSA;
+typedef TPMS_SIGNATURE_ECC TPMS_SIGNATURE_ECDAA;
+typedef TPMS_SIGNATURE_ECC TPMS_SIGNATURE_SM2;
+typedef TPMS_SIGNATURE_ECC TPMS_SIGNATURE_ECSCHNORR;
+typedef TPM2_ALG_ID TPMI_ALG_PUBLIC;
+typedef uint32_t TPM2_NV_INDEX;
+typedef UINT8 TPM2_NT;
+typedef uint32_t TPMA_NV;
+typedef UINT32 TPM_AT;
+typedef UINT32 TPM_EA;
+typedef TPM2_HANDLE TPMI_RH_AC;
+%}
+
+/* SWIG doesn't propagate #defines defined in include files to
+ * generated wrapper code therefore these need to be redefined
+ * manually here */
+#define TPM2_MAX_COMMAND_SIZE   4096
+#define TPM2_MAX_RESPONSE_SIZE  4096
+#define TPM2_NUM_PCR_BANKS      16
+#define TPM2_MAX_DIGEST_BUFFER  1024
+#define TPM2_MAX_NV_BUFFER_SIZE 2048
+#define TPM2_MAX_PCRS           32
+#define TPM2_MAX_ALG_LIST_SIZE  128
+#define TPM2_MAX_CAP_CC         256
+#define TPM2_MAX_CAP_BUFFER     1024
+#define TPM2_MAX_CONTEXT_SIZE   5120
+#define TPM2_SHA_DIGEST_SIZE    20
+#define TPM2_SHA1_DIGEST_SIZE   20
+#define TPM2_SHA256_DIGEST_SIZE 32
+#define TPM2_SHA384_DIGEST_SIZE 48
+#define TPM2_SHA512_DIGEST_SIZE 64
+#define TPM2_SM3_256_DIGEST_SIZE 32
+#define TPM2_MAX_SYM_BLOCK_SIZE 16
+#define TPM2_MAX_SYM_DATA       256
+#define TPM2_MAX_ECC_KEY_BYTES  128
+#define TPM2_MAX_SYM_KEY_BYTES  32
+#define TPM2_MAX_RSA_KEY_BYTES  512
+#define TPM2_LABEL_MAX_BUFFER   32
+
+#undef TPM2_PCR_SELECT_MAX
+#define TPM2_PCR_SELECT_MAX      ((TPM2_MAX_PCRS + 7) / 8)
+#undef TPM2_MAX_CAP_HANDLES
+#define TPM2_MAX_CAP_HANDLES     ((TPM2_MAX_CAP_BUFFER - 8) / 4)
+#undef TPM2_MAX_CAP_ALGS
+#define TPM2_MAX_CAP_ALGS        ((TPM2_MAX_CAP_BUFFER - 8) / 8)
+#undef TPM2_MAX_TPM_PROPERTIES
+#define TPM2_MAX_TPM_PROPERTIES  ((TPM2_MAX_CAP_BUFFER - 8) / 8)
+#undef TPM2_MAX_PCR_PROPERTIES
+#define TPM2_MAX_PCR_PROPERTIES  ((TPM2_MAX_CAP_BUFFER - 8) / 12)
+#undef TPM2_MAX_ECC_CURVES
+#define TPM2_MAX_ECC_CURVES      ((TPM2_MAX_CAP_BUFFER - 8) / 2)
+#undef TPM2_MAX_TAGGED_POLICIES
+#define TPM2_MAX_TAGGED_POLICIES ((TPM2_MAX_CAP_BUFFER - 8) / 72)
+#undef TPM2_PRIVATE_VENDOR_SPECIFIC_BYTES
+#define TPM2_PRIVATE_VENDOR_SPECIFIC_BYTES ((TPM2_MAX_RSA_KEY_BYTES / 2) * (3 + 2))
+#undef TPM2_MAX_PTT_PROPERTIES
+#define TPM2_MAX_PTT_PROPERTIES (TPM2_MAX_CAP_BUFFER / 4)
+#undef TPM2_MAX_AC_CAPABILITIES
+#define TPM2_MAX_AC_CAPABILITIES (TPM2_MAX_CAP_BUFFER / 8)
+#undef TPM2_ALG_ERROR
+#define TPM2_ALG_ERROR               0x0000
+#undef TPM2_ALG_RSA
+#define TPM2_ALG_RSA                 0x0001
+#undef TPM2_ALG_SHA
+#define TPM2_ALG_SHA                 0x0004
+#undef TPM2_ALG_SHA1
+#define TPM2_ALG_SHA1                0x0004
+#undef TPM2_ALG_HMAC
+#define TPM2_ALG_HMAC                0x0005
+#undef TPM2_ALG_AES
+#define TPM2_ALG_AES                 0x0006
+#undef TPM2_ALG_MGF1
+#define TPM2_ALG_MGF1                0x0007
+#undef TPM2_ALG_KEYEDHASH
+#define TPM2_ALG_KEYEDHASH           0x0008
+#undef TPM2_ALG_XOR
+#define TPM2_ALG_XOR                 0x000A
+#undef TPM2_ALG_SHA256
+#define TPM2_ALG_SHA256              0x000B
+#undef TPM2_ALG_SHA384
+#define TPM2_ALG_SHA384              0x000C
+#undef TPM2_ALG_SHA512
+#define TPM2_ALG_SHA512              0x000D
+#undef TPM2_ALG_NULL
+#define TPM2_ALG_NULL                0x0010
+#undef TPM2_ALG_SM3_256
+#define TPM2_ALG_SM3_256             0x0012
+#undef TPM2_ALG_SM4
+#define TPM2_ALG_SM4                 0x0013
+#undef TPM2_ALG_RSASSA
+#define TPM2_ALG_RSASSA              0x0014
+#undef TPM2_ALG_RSAES
+#define TPM2_ALG_RSAES               0x0015
+#undef TPM2_ALG_RSAPSS
+#define TPM2_ALG_RSAPSS              0x0016
+#undef TPM2_ALG_OAEP
+#define TPM2_ALG_OAEP                0x0017
+#undef TPM2_ALG_ECDSA
+#define TPM2_ALG_ECDSA               0x0018
+#undef TPM2_ALG_ECDH
+#define TPM2_ALG_ECDH                0x0019
+#undef TPM2_ALG_ECDAA
+#define TPM2_ALG_ECDAA               0x001A
+#undef TPM2_ALG_SM2
+#define TPM2_ALG_SM2                 0x001B
+#undef TPM2_ALG_ECSCHNORR
+#define TPM2_ALG_ECSCHNORR           0x001C
+#undef TPM2_ALG_ECMQV
+#define TPM2_ALG_ECMQV               0x001D
+#undef TPM2_ALG_KDF1_SP800_56A
+#define TPM2_ALG_KDF1_SP800_56A      0x0020
+#undef TPM2_ALG_KDF2
+#define TPM2_ALG_KDF2                0x0021
+#undef TPM2_ALG_KDF1_SP800_108
+#define TPM2_ALG_KDF1_SP800_108      0x0022
+#undef TPM2_ALG_ECC
+#define TPM2_ALG_ECC                 0x0023
+#undef TPM2_ALG_SYMCIPHER
+#define TPM2_ALG_SYMCIPHER           0x0025
+#undef TPM2_ALG_CAMELLIA
+#define TPM2_ALG_CAMELLIA            0x0026
+#undef TPM2_ALG_CMAC
+#define TPM2_ALG_CMAC                0x003F
+#undef TPM2_ALG_CTR
+#define TPM2_ALG_CTR                 0x0040
+#undef TPM2_ALG_SHA3_256
+#define TPM2_ALG_SHA3_256            0x0027
+#undef TPM2_ALG_SHA3_384
+#define TPM2_ALG_SHA3_384            0x0028
+#undef TPM2_ALG_SHA3_512
+#define TPM2_ALG_SHA3_512            0x0029
+#undef TPM2_ALG_OFB
+#define TPM2_ALG_OFB                 0x0041
+#undef TPM2_ALG_CBC
+#define TPM2_ALG_CBC                 0x0042
+#undef TPM2_ALG_CFB
+#define TPM2_ALG_CFB                 0x0043
+#undef TPM2_ALG_ECB
+#define TPM2_ALG_ECB                 0x0044
+#undef TPM2_ALG_FIRST
+#define TPM2_ALG_FIRST               0x0001
+#undef TPM2_ALG_LAST
+#define TPM2_ALG_LAST                0x0044
+#undef TPM2_ECC_NONE
+#define TPM2_ECC_NONE                0x0000
+#undef TPM2_ECC_NIST_P192
+#define TPM2_ECC_NIST_P192           0x0001
+#undef TPM2_ECC_NIST_P224
+#define TPM2_ECC_NIST_P224           0x0002
+#undef TPM2_ECC_NIST_P256
+#define TPM2_ECC_NIST_P256           0x0003
+#undef TPM2_ECC_NIST_P384
+#define TPM2_ECC_NIST_P384           0x0004
+#undef TPM2_ECC_NIST_P521
+#define TPM2_ECC_NIST_P521           0x0005
+#undef TPM2_ECC_BN_P256
+#define TPM2_ECC_BN_P256             0x0010
+#undef TPM2_ECC_BN_P638
+#define TPM2_ECC_BN_P638             0x0011
+#undef TPM2_ECC_SM2_P256
+#define TPM2_ECC_SM2_P256            0x0020
+#undef TPM2_SPEC_FAMILY
+#define TPM2_SPEC_FAMILY      0x322E3000
+#undef TPM2_SPEC_LEVEL
+#define TPM2_SPEC_LEVEL       00
+#undef TPM2_SPEC_VERSION
+#define TPM2_SPEC_VERSION     126
+#undef TPM2_SPEC_YEAR
+#define TPM2_SPEC_YEAR        2015
+#undef TPM2_SPEC_DAY_OF_YEAR
+#define TPM2_SPEC_DAY_OF_YEAR 233
+#undef TPM2_GENERATED_VALUE
+#define TPM2_GENERATED_VALUE   0xff544347
+#undef TPM2_RC_SUCCESS
+#define TPM2_RC_SUCCESS                            0x000
+#undef TPM2_RC_BAD_TAG
+#define TPM2_RC_BAD_TAG                            0x01E
+#undef TPM2_RC_VER1
+#define TPM2_RC_VER1                               0x100
+#undef TPM2_RC_INITIALIZE
+#define TPM2_RC_INITIALIZE         (TPM2_RC_VER1 + 0x000)
+#undef TPM2_RC_FAILURE
+#define TPM2_RC_FAILURE            (TPM2_RC_VER1 + 0x001)
+#undef TPM2_RC_SEQUENCE
+#define TPM2_RC_SEQUENCE           (TPM2_RC_VER1 + 0x003)
+#undef TPM2_RC_PRIVATE
+#define TPM2_RC_PRIVATE            (TPM2_RC_VER1 + 0x00B)
+#undef TPM2_RC_HMAC
+#define TPM2_RC_HMAC               (TPM2_RC_VER1 + 0x019)
+#undef TPM2_RC_DISABLED
+#define TPM2_RC_DISABLED           (TPM2_RC_VER1 + 0x020)
+#undef TPM2_RC_EXCLUSIVE
+#define TPM2_RC_EXCLUSIVE          (TPM2_RC_VER1 + 0x021)
+#undef TPM2_RC_AUTH_TYPE
+#define TPM2_RC_AUTH_TYPE          (TPM2_RC_VER1 + 0x024)
+#undef TPM2_RC_AUTH_MISSING
+#define TPM2_RC_AUTH_MISSING       (TPM2_RC_VER1 + 0x025)
+#undef TPM2_RC_POLICY
+#define TPM2_RC_POLICY             (TPM2_RC_VER1 + 0x026)
+#undef TPM2_RC_PCR
+#define TPM2_RC_PCR                (TPM2_RC_VER1 + 0x027)
+#undef TPM2_RC_PCR_CHANGED
+#define TPM2_RC_PCR_CHANGED        (TPM2_RC_VER1 + 0x028)
+#undef TPM2_RC_UPGRADE
+#define TPM2_RC_UPGRADE            (TPM2_RC_VER1 + 0x02D)
+#undef TPM2_RC_TOO_MANY_CONTEXTS
+#define TPM2_RC_TOO_MANY_CONTEXTS  (TPM2_RC_VER1 + 0x02E)
+#undef TPM2_RC_AUTH_UNAVAILABLE
+#define TPM2_RC_AUTH_UNAVAILABLE   (TPM2_RC_VER1 + 0x02F)
+#undef TPM2_RC_REBOOT
+#define TPM2_RC_REBOOT             (TPM2_RC_VER1 + 0x030)
+#undef TPM2_RC_UNBALANCED
+#define TPM2_RC_UNBALANCED         (TPM2_RC_VER1 + 0x031)
+#undef TPM2_RC_COMMAND_SIZE
+#define TPM2_RC_COMMAND_SIZE       (TPM2_RC_VER1 + 0x042)
+#undef TPM2_RC_COMMAND_CODE
+#define TPM2_RC_COMMAND_CODE       (TPM2_RC_VER1 + 0x043)
+#undef TPM2_RC_AUTHSIZE
+#define TPM2_RC_AUTHSIZE           (TPM2_RC_VER1 + 0x044)
+#undef TPM2_RC_AUTH_CONTEXT
+#define TPM2_RC_AUTH_CONTEXT       (TPM2_RC_VER1 + 0x045)
+#undef TPM2_RC_NV_RANGE
+#define TPM2_RC_NV_RANGE           (TPM2_RC_VER1 + 0x046)
+#undef TPM2_RC_NV_SIZE
+#define TPM2_RC_NV_SIZE            (TPM2_RC_VER1 + 0x047)
+#undef TPM2_RC_NV_LOCKED
+#define TPM2_RC_NV_LOCKED          (TPM2_RC_VER1 + 0x048)
+#undef TPM2_RC_NV_AUTHORIZATION
+#define TPM2_RC_NV_AUTHORIZATION   (TPM2_RC_VER1 + 0x049)
+#undef TPM2_RC_NV_UNINITIALIZED
+#define TPM2_RC_NV_UNINITIALIZED   (TPM2_RC_VER1 + 0x04A)
+#undef TPM2_RC_NV_SPACE
+#define TPM2_RC_NV_SPACE           (TPM2_RC_VER1 + 0x04B)
+#undef TPM2_RC_NV_DEFINED
+#define TPM2_RC_NV_DEFINED         (TPM2_RC_VER1 + 0x04C)
+#undef TPM2_RC_BAD_CONTEXT
+#define TPM2_RC_BAD_CONTEXT        (TPM2_RC_VER1 + 0x050)
+#undef TPM2_RC_CPHASH
+#define TPM2_RC_CPHASH             (TPM2_RC_VER1 + 0x051)
+#undef TPM2_RC_PARENT
+#define TPM2_RC_PARENT             (TPM2_RC_VER1 + 0x052)
+#undef TPM2_RC_NEEDS_TEST
+#define TPM2_RC_NEEDS_TEST         (TPM2_RC_VER1 + 0x053)
+#undef TPM2_RC_NO_RESULT
+#define TPM2_RC_NO_RESULT          (TPM2_RC_VER1 + 0x054)
+#undef TPM2_RC_SENSITIVE
+#define TPM2_RC_SENSITIVE          (TPM2_RC_VER1 + 0x055)
+#undef TPM2_RC_MAX_FM0
+#define TPM2_RC_MAX_FM0            (TPM2_RC_VER1 + 0x07F)
+#undef TPM2_RC_FMT1
+#define TPM2_RC_FMT1                               0x080
+#undef TPM2_RC_ASYMMETRIC
+#define TPM2_RC_ASYMMETRIC         (TPM2_RC_FMT1 + 0x001)
+#undef TPM2_RC_ATTRIBUTES
+#define TPM2_RC_ATTRIBUTES         (TPM2_RC_FMT1 + 0x002)
+#undef TPM2_RC_HASH
+#define TPM2_RC_HASH               (TPM2_RC_FMT1 + 0x003)
+#undef TPM2_RC_VALUE
+#define TPM2_RC_VALUE              (TPM2_RC_FMT1 + 0x004)
+#undef TPM2_RC_HIERARCHY
+#define TPM2_RC_HIERARCHY          (TPM2_RC_FMT1 + 0x005)
+#undef TPM2_RC_KEY_SIZE
+#define TPM2_RC_KEY_SIZE           (TPM2_RC_FMT1 + 0x007)
+#undef TPM2_RC_MGF
+#define TPM2_RC_MGF                (TPM2_RC_FMT1 + 0x008)
+#undef TPM2_RC_MODE
+#define TPM2_RC_MODE               (TPM2_RC_FMT1 + 0x009)
+#undef TPM2_RC_TYPE
+#define TPM2_RC_TYPE               (TPM2_RC_FMT1 + 0x00A)
+#undef TPM2_RC_HANDLE
+#define TPM2_RC_HANDLE             (TPM2_RC_FMT1 + 0x00B)
+#undef TPM2_RC_KDF
+#define TPM2_RC_KDF                (TPM2_RC_FMT1 + 0x00C)
+#undef TPM2_RC_RANGE
+#define TPM2_RC_RANGE              (TPM2_RC_FMT1 + 0x00D)
+#undef TPM2_RC_AUTH_FAIL
+#define TPM2_RC_AUTH_FAIL          (TPM2_RC_FMT1 + 0x00E)
+#undef TPM2_RC_NONCE
+#define TPM2_RC_NONCE              (TPM2_RC_FMT1 + 0x00F)
+#undef TPM2_RC_PP
+#define TPM2_RC_PP                 (TPM2_RC_FMT1 + 0x010)
+#undef TPM2_RC_SCHEME
+#define TPM2_RC_SCHEME             (TPM2_RC_FMT1 + 0x012)
+#undef TPM2_RC_SIZE
+#define TPM2_RC_SIZE               (TPM2_RC_FMT1 + 0x015)
+#undef TPM2_RC_SYMMETRIC
+#define TPM2_RC_SYMMETRIC          (TPM2_RC_FMT1 + 0x016)
+#undef TPM2_RC_TAG
+#define TPM2_RC_TAG                (TPM2_RC_FMT1 + 0x017)
+#undef TPM2_RC_SELECTOR
+#define TPM2_RC_SELECTOR           (TPM2_RC_FMT1 + 0x018)
+#undef TPM2_RC_INSUFFICIENT
+#define TPM2_RC_INSUFFICIENT       (TPM2_RC_FMT1 + 0x01A)
+#undef TPM2_RC_SIGNATURE
+#define TPM2_RC_SIGNATURE          (TPM2_RC_FMT1 + 0x01B)
+#undef TPM2_RC_KEY
+#define TPM2_RC_KEY                (TPM2_RC_FMT1 + 0x01C)
+#undef TPM2_RC_POLICY_FAIL
+#define TPM2_RC_POLICY_FAIL        (TPM2_RC_FMT1 + 0x01D)
+#undef TPM2_RC_INTEGRITY
+#define TPM2_RC_INTEGRITY          (TPM2_RC_FMT1 + 0x01F)
+#undef TPM2_RC_TICKET
+#define TPM2_RC_TICKET             (TPM2_RC_FMT1 + 0x020)
+#undef TPM2_RC_RESERVED_BITS
+#define TPM2_RC_RESERVED_BITS      (TPM2_RC_FMT1 + 0x021)
+#undef TPM2_RC_BAD_AUTH
+#define TPM2_RC_BAD_AUTH           (TPM2_RC_FMT1 + 0x022)
+#undef TPM2_RC_EXPIRED
+#define TPM2_RC_EXPIRED            (TPM2_RC_FMT1 + 0x023)
+#undef TPM2_RC_POLICY_CC
+#define TPM2_RC_POLICY_CC          (TPM2_RC_FMT1 + 0x024)
+#undef TPM2_RC_BINDING
+#define TPM2_RC_BINDING            (TPM2_RC_FMT1 + 0x025)
+#undef TPM2_RC_CURVE
+#define TPM2_RC_CURVE              (TPM2_RC_FMT1 + 0x026)
+#undef TPM2_RC_ECC_POINT
+#define TPM2_RC_ECC_POINT          (TPM2_RC_FMT1 + 0x027)
+#undef TPM2_RC_WARN
+#define TPM2_RC_WARN                               0x900
+#undef TPM2_RC_CONTEXT_GAP
+#define TPM2_RC_CONTEXT_GAP        (TPM2_RC_WARN + 0x001)
+#undef TPM2_RC_OBJECT_MEMORY
+#define TPM2_RC_OBJECT_MEMORY      (TPM2_RC_WARN + 0x002)
+#undef TPM2_RC_SESSION_MEMORY
+#define TPM2_RC_SESSION_MEMORY     (TPM2_RC_WARN + 0x003)
+#undef TPM2_RC_MEMORY
+#define TPM2_RC_MEMORY             (TPM2_RC_WARN + 0x004)
+#undef TPM2_RC_SESSION_HANDLES
+#define TPM2_RC_SESSION_HANDLES    (TPM2_RC_WARN + 0x005)
+#undef TPM2_RC_OBJECT_HANDLES
+#define TPM2_RC_OBJECT_HANDLES     (TPM2_RC_WARN + 0x006)
+#undef TPM2_RC_LOCALITY
+#define TPM2_RC_LOCALITY           (TPM2_RC_WARN + 0x007)
+#undef TPM2_RC_YIELDED
+#define TPM2_RC_YIELDED            (TPM2_RC_WARN + 0x008)
+#undef TPM2_RC_CANCELED
+#define TPM2_RC_CANCELED           (TPM2_RC_WARN + 0x009)
+#undef TPM2_RC_TESTING
+#define TPM2_RC_TESTING            (TPM2_RC_WARN + 0x00A)
+#undef TPM2_RC_REFERENCE_H0
+#define TPM2_RC_REFERENCE_H0       (TPM2_RC_WARN + 0x010)
+#undef TPM2_RC_REFERENCE_H1
+#define TPM2_RC_REFERENCE_H1       (TPM2_RC_WARN + 0x011)
+#undef TPM2_RC_REFERENCE_H2
+#define TPM2_RC_REFERENCE_H2       (TPM2_RC_WARN + 0x012)
+#undef TPM2_RC_REFERENCE_H3
+#define TPM2_RC_REFERENCE_H3       (TPM2_RC_WARN + 0x013)
+#undef TPM2_RC_REFERENCE_H4
+#define TPM2_RC_REFERENCE_H4       (TPM2_RC_WARN + 0x014)
+#undef TPM2_RC_REFERENCE_H5
+#define TPM2_RC_REFERENCE_H5       (TPM2_RC_WARN + 0x015)
+#undef TPM2_RC_REFERENCE_H6
+#define TPM2_RC_REFERENCE_H6       (TPM2_RC_WARN + 0x016)
+#undef TPM2_RC_REFERENCE_S0
+#define TPM2_RC_REFERENCE_S0       (TPM2_RC_WARN + 0x018)
+#undef TPM2_RC_REFERENCE_S1
+#define TPM2_RC_REFERENCE_S1       (TPM2_RC_WARN + 0x019)
+#undef TPM2_RC_REFERENCE_S2
+#define TPM2_RC_REFERENCE_S2       (TPM2_RC_WARN + 0x01A)
+#undef TPM2_RC_REFERENCE_S3
+#define TPM2_RC_REFERENCE_S3       (TPM2_RC_WARN + 0x01B)
+#undef TPM2_RC_REFERENCE_S4
+#define TPM2_RC_REFERENCE_S4       (TPM2_RC_WARN + 0x01C)
+#undef TPM2_RC_REFERENCE_S5
+#define TPM2_RC_REFERENCE_S5       (TPM2_RC_WARN + 0x01D)
+#undef TPM2_RC_REFERENCE_S6
+#define TPM2_RC_REFERENCE_S6       (TPM2_RC_WARN + 0x01E)
+#undef TPM2_RC_NV_RATE
+#define TPM2_RC_NV_RATE            (TPM2_RC_WARN + 0x020)
+#undef TPM2_RC_LOCKOUT
+#define TPM2_RC_LOCKOUT            (TPM2_RC_WARN + 0x021)
+#undef TPM2_RC_RETRY
+#define TPM2_RC_RETRY              (TPM2_RC_WARN + 0x022)
+#undef TPM2_RC_NV_UNAVAILABLE
+#define TPM2_RC_NV_UNAVAILABLE     (TPM2_RC_WARN + 0x023)
+#undef TPM2_RC_NOT_USED
+#define TPM2_RC_NOT_USED           (TPM2_RC_WARN + 0x07F)
+#undef TPM2_RC_H
+#define TPM2_RC_H                                 0x000
+#undef TPM2_RC_P
+#define TPM2_RC_P                                 0x040
+#undef TPM2_RC_S
+#define TPM2_RC_S                                 0x800
+#undef TPM2_RC_1
+#define TPM2_RC_1                                 0x100
+#undef TPM2_RC_2
+#define TPM2_RC_2                                 0x200
+#undef TPM2_RC_3
+#define TPM2_RC_3                                 0x300
+#undef TPM2_RC_4
+#define TPM2_RC_4                                 0x400
+#undef TPM2_RC_5
+#define TPM2_RC_5                                 0x500
+#undef TPM2_RC_6
+#define TPM2_RC_6                                 0x600
+#undef TPM2_RC_7
+#define TPM2_RC_7                                 0x700
+#undef TPM2_RC_8
+#define TPM2_RC_8                                 0x800
+#undef TPM2_RC_9
+#define TPM2_RC_9                                 0x900
+#undef TPM2_RC_A
+#define TPM2_RC_A                                 0xA00
+#undef TPM2_RC_B
+#define TPM2_RC_B                                 0xB00
+#undef TPM2_RC_C
+#define TPM2_RC_C                                 0xC00
+#undef TPM2_RC_D
+#define TPM2_RC_D                                 0xD00
+#undef TPM2_RC_E
+#define TPM2_RC_E                                 0xE00
+#undef TPM2_RC_F
+#define TPM2_RC_F                                 0xF00
+#undef TPM2_RC_N_MASK
+#define TPM2_RC_N_MASK                            0xF00
+#undef TPM2_CLOCK_COARSE_SLOWER
+#define TPM2_CLOCK_COARSE_SLOWER -3
+#undef TPM2_CLOCK_MEDIUM_SLOWER
+#define TPM2_CLOCK_MEDIUM_SLOWER -2
+#undef TPM2_CLOCK_FINE_SLOWER
+#define TPM2_CLOCK_FINE_SLOWER   -1
+#undef TPM2_CLOCK_NO_CHANGE
+#define TPM2_CLOCK_NO_CHANGE      0
+#undef TPM2_CLOCK_FINE_FASTER
+#define TPM2_CLOCK_FINE_FASTER    1
+#undef TPM2_CLOCK_MEDIUM_FASTER
+#define TPM2_CLOCK_MEDIUM_FASTER  2
+#undef TPM2_CLOCK_COARSE_FASTER
+#define TPM2_CLOCK_COARSE_FASTER  3
+#undef TPM2_EO_EQ
+#define TPM2_EO_EQ          0x0000
+#undef TPM2_EO_NEQ
+#define TPM2_EO_NEQ         0x0001
+#undef TPM2_EO_SIGNED_GT
+#define TPM2_EO_SIGNED_GT   0x0002
+#undef TPM2_EO_UNSIGNED_GT
+#define TPM2_EO_UNSIGNED_GT 0x0003
+#undef TPM2_EO_SIGNED_LT
+#define TPM2_EO_SIGNED_LT   0x0004
+#undef TPM2_EO_UNSIGNED_LT
+#define TPM2_EO_UNSIGNED_LT 0x0005
+#undef TPM2_EO_SIGNED_GE
+#define TPM2_EO_SIGNED_GE   0x0006
+#undef TPM2_EO_UNSIGNED_GE
+#define TPM2_EO_UNSIGNED_GE 0x0007
+#undef TPM2_EO_SIGNED_LE
+#define TPM2_EO_SIGNED_LE   0x0008
+#undef TPM2_EO_UNSIGNED_LE
+#define TPM2_EO_UNSIGNED_LE 0x0009
+#undef TPM2_EO_BITSET
+#define TPM2_EO_BITSET      0x000A
+#undef TPM2_EO_BITCLEAR
+#define TPM2_EO_BITCLEAR    0x000B
+#undef TPM2_ST_RSP_COMMAND
+#define TPM2_ST_RSP_COMMAND          0x00C4
+#undef TPM2_ST_NULL
+#define TPM2_ST_NULL                 0X8000
+#undef TPM2_ST_NO_SESSIONS
+#define TPM2_ST_NO_SESSIONS          0x8001
+#undef TPM2_ST_SESSIONS
+#define TPM2_ST_SESSIONS             0x8002
+#undef TPM2_ST_RESERVED1
+#define TPM2_ST_RESERVED1            0x8003
+#undef TPM2_ST_RESERVED2
+#define TPM2_ST_RESERVED2            0x8004
+#undef TPM2_ST_ATTEST_NV
+#define TPM2_ST_ATTEST_NV            0x8014
+#undef TPM2_ST_ATTEST_COMMAND_AUDIT
+#define TPM2_ST_ATTEST_COMMAND_AUDIT 0x8015
+#undef TPM2_ST_ATTEST_SESSION_AUDIT
+#define TPM2_ST_ATTEST_SESSION_AUDIT 0x8016
+#undef TPM2_ST_ATTEST_CERTIFY
+#define TPM2_ST_ATTEST_CERTIFY       0x8017
+#undef TPM2_ST_ATTEST_QUOTE
+#define TPM2_ST_ATTEST_QUOTE         0x8018
+#undef TPM2_ST_ATTEST_TIME
+#define TPM2_ST_ATTEST_TIME          0x8019
+#undef TPM2_ST_ATTEST_CREATION
+#define TPM2_ST_ATTEST_CREATION      0x801A
+#undef TPM2_ST_RESERVED3
+#define TPM2_ST_RESERVED3            0x801B
+#undef TPM2_ST_CREATION
+#define TPM2_ST_CREATION             0x8021
+#undef TPM2_ST_VERIFIED
+#define TPM2_ST_VERIFIED             0x8022
+#undef TPM2_ST_AUTH_SECRET
+#define TPM2_ST_AUTH_SECRET          0x8023
+#undef TPM2_ST_HASHCHECK
+#define TPM2_ST_HASHCHECK            0x8024
+#undef TPM2_ST_AUTH_SIGNED
+#define TPM2_ST_AUTH_SIGNED          0x8025
+#undef TPM2_ST_FU_MANIFEST
+#define TPM2_ST_FU_MANIFEST          0x8029
+#undef TPM2_SU_CLEAR
+#define TPM2_SU_CLEAR    0x0000
+#undef TPM2_SU_STATE
+#define TPM2_SU_STATE    0x0001
+#undef TPM2_SE_HMAC
+#define TPM2_SE_HMAC    0x00
+#undef TPM2_SE_POLICY
+#define TPM2_SE_POLICY  0x01
+#undef TPM2_SE_TRIAL
+#define TPM2_SE_TRIAL   0x03
+#undef TPM2_CAP_FIRST
+#define TPM2_CAP_FIRST           0x00000000
+#undef TPM2_CAP_ALGS
+#define TPM2_CAP_ALGS            0x00000000
+#undef TPM2_CAP_HANDLES
+#define TPM2_CAP_HANDLES         0x00000001
+#undef TPM2_CAP_COMMANDS
+#define TPM2_CAP_COMMANDS        0x00000002
+#undef TPM2_CAP_PP_COMMANDS
+#define TPM2_CAP_PP_COMMANDS     0x00000003
+#undef TPM2_CAP_AUDIT_COMMANDS
+#define TPM2_CAP_AUDIT_COMMANDS  0x00000004
+#undef TPM2_CAP_PCRS
+#define TPM2_CAP_PCRS            0x00000005
+#undef TPM2_CAP_TPM_PROPERTIES
+#define TPM2_CAP_TPM_PROPERTIES  0x00000006
+#undef TPM2_CAP_PCR_PROPERTIES
+#define TPM2_CAP_PCR_PROPERTIES  0x00000007
+#undef TPM2_CAP_ECC_CURVES
+#define TPM2_CAP_ECC_CURVES      0x00000008
+#undef TPM2_CAP_LAST
+#define TPM2_CAP_LAST            0x00000008
+#undef TPM2_CAP_VENDOR_PROPERTY
+#define TPM2_CAP_VENDOR_PROPERTY 0x00000100
+#undef TPM2_PT_NONE
+#define TPM2_PT_NONE                     0x00000000
+#undef TPM2_PT_GROUP
+#define TPM2_PT_GROUP                    0x00000100
+#undef TPM2_PT_FIXED
+#define TPM2_PT_FIXED                    (TPM2_PT_GROUP * 1)
+#undef TPM2_PT_FAMILY_INDICATOR
+#define TPM2_PT_FAMILY_INDICATOR         (TPM2_PT_FIXED + 0)
+#undef TPM2_PT_LEVEL
+#define TPM2_PT_LEVEL                    (TPM2_PT_FIXED + 1)
+#undef TPM2_PT_REVISION
+#define TPM2_PT_REVISION                 (TPM2_PT_FIXED + 2)
+#undef TPM2_PT_DAY_OF_YEAR
+#define TPM2_PT_DAY_OF_YEAR              (TPM2_PT_FIXED + 3)
+#undef TPM2_PT_YEAR
+#define TPM2_PT_YEAR                     (TPM2_PT_FIXED + 4)
+#undef TPM2_PT_MANUFACTURER
+#define TPM2_PT_MANUFACTURER             (TPM2_PT_FIXED + 5)
+#undef TPM2_PT_VENDOR_STRING_1
+#define TPM2_PT_VENDOR_STRING_1          (TPM2_PT_FIXED + 6)
+#undef TPM2_PT_VENDOR_STRING_2
+#define TPM2_PT_VENDOR_STRING_2          (TPM2_PT_FIXED + 7)
+#undef TPM2_PT_VENDOR_STRING_3
+#define TPM2_PT_VENDOR_STRING_3          (TPM2_PT_FIXED + 8)
+#undef TPM2_PT_VENDOR_STRING_4
+#define TPM2_PT_VENDOR_STRING_4          (TPM2_PT_FIXED + 9)
+#undef TPM2_PT_VENDOR_TPM_TYPE
+#define TPM2_PT_VENDOR_TPM_TYPE          (TPM2_PT_FIXED + 10)
+#undef TPM2_PT_FIRMWARE_VERSION_1
+#define TPM2_PT_FIRMWARE_VERSION_1       (TPM2_PT_FIXED + 11)
+#undef TPM2_PT_FIRMWARE_VERSION_2
+#define TPM2_PT_FIRMWARE_VERSION_2       (TPM2_PT_FIXED + 12)
+#undef TPM2_PT_INPUT_BUFFER
+#define TPM2_PT_INPUT_BUFFER             (TPM2_PT_FIXED + 13)
+#undef TPM2_PT_TPM2_HR_TRANSIENT_MIN
+#define TPM2_PT_TPM2_HR_TRANSIENT_MIN    (TPM2_PT_FIXED + 14)
+#undef TPM2_PT_TPM2_HR_PERSISTENT_MIN
+#define TPM2_PT_TPM2_HR_PERSISTENT_MIN   (TPM2_PT_FIXED + 15)
+#undef TPM2_PT_HR_LOADED_MIN
+#define TPM2_PT_HR_LOADED_MIN            (TPM2_PT_FIXED + 16)
+#undef TPM2_PT_ACTIVE_SESSIONS_MAX
+#define TPM2_PT_ACTIVE_SESSIONS_MAX      (TPM2_PT_FIXED + 17)
+#undef TPM2_PT_PCR_COUNT
+#define TPM2_PT_PCR_COUNT                (TPM2_PT_FIXED + 18)
+#undef TPM2_PT_PCR_SELECT_MIN
+#define TPM2_PT_PCR_SELECT_MIN           (TPM2_PT_FIXED + 19)
+#undef TPM2_PT_CONTEXT_GAP_MAX
+#define TPM2_PT_CONTEXT_GAP_MAX          (TPM2_PT_FIXED + 20)
+#undef TPM2_PT_NV_COUNTERS_MAX
+#define TPM2_PT_NV_COUNTERS_MAX          (TPM2_PT_FIXED + 22)
+#undef TPM2_PT_NV_INDEX_MAX
+#define TPM2_PT_NV_INDEX_MAX             (TPM2_PT_FIXED + 23)
+#undef TPM2_PT_MEMORY
+#define TPM2_PT_MEMORY                   (TPM2_PT_FIXED + 24)
+#undef TPM2_PT_CLOCK_UPDATE
+#define TPM2_PT_CLOCK_UPDATE             (TPM2_PT_FIXED + 25)
+#undef TPM2_PT_CONTEXT_HASH
+#define TPM2_PT_CONTEXT_HASH             (TPM2_PT_FIXED + 26)
+#undef TPM2_PT_CONTEXT_SYM
+#define TPM2_PT_CONTEXT_SYM              (TPM2_PT_FIXED + 27)
+#undef TPM2_PT_CONTEXT_SYM_SIZE
+#define TPM2_PT_CONTEXT_SYM_SIZE         (TPM2_PT_FIXED + 28)
+#undef TPM2_PT_ORDERLY_COUNT
+#define TPM2_PT_ORDERLY_COUNT            (TPM2_PT_FIXED + 29)
+#undef TPM2_PT_MAX_COMMAND_SIZE
+#define TPM2_PT_MAX_COMMAND_SIZE         (TPM2_PT_FIXED + 30)
+#undef TPM2_PT_MAX_RESPONSE_SIZE
+#define TPM2_PT_MAX_RESPONSE_SIZE        (TPM2_PT_FIXED + 31)
+#undef TPM2_PT_MAX_DIGEST
+#define TPM2_PT_MAX_DIGEST               (TPM2_PT_FIXED + 32)
+#undef TPM2_PT_MAX_OBJECT_CONTEXT
+#define TPM2_PT_MAX_OBJECT_CONTEXT       (TPM2_PT_FIXED + 33)
+#undef TPM2_PT_MAX_SESSION_CONTEXT
+#define TPM2_PT_MAX_SESSION_CONTEXT      (TPM2_PT_FIXED + 34)
+#undef TPM2_PT_PS_FAMILY_INDICATOR
+#define TPM2_PT_PS_FAMILY_INDICATOR      (TPM2_PT_FIXED + 35)
+#undef TPM2_PT_PS_LEVEL
+#define TPM2_PT_PS_LEVEL                 (TPM2_PT_FIXED + 36)
+#undef TPM2_PT_PS_REVISION
+#define TPM2_PT_PS_REVISION              (TPM2_PT_FIXED + 37)
+#undef TPM2_PT_PS_DAY_OF_YEAR
+#define TPM2_PT_PS_DAY_OF_YEAR           (TPM2_PT_FIXED + 38)
+#undef TPM2_PT_PS_YEAR
+#define TPM2_PT_PS_YEAR                  (TPM2_PT_FIXED + 39)
+#undef TPM2_PT_SPLIT_MAX
+#define TPM2_PT_SPLIT_MAX                (TPM2_PT_FIXED + 40)
+#undef TPM2_PT_TOTAL_COMMANDS
+#define TPM2_PT_TOTAL_COMMANDS           (TPM2_PT_FIXED + 41)
+#undef TPM2_PT_LIBRARY_COMMANDS
+#define TPM2_PT_LIBRARY_COMMANDS         (TPM2_PT_FIXED + 42)
+#undef TPM2_PT_VENDOR_COMMANDS
+#define TPM2_PT_VENDOR_COMMANDS          (TPM2_PT_FIXED + 43)
+#undef TPM2_PT_NV_BUFFER_MAX
+#define TPM2_PT_NV_BUFFER_MAX            (TPM2_PT_FIXED + 44)
+#undef TPM2_PT_MODES
+#define TPM2_PT_MODES                    (TPM2_PT_FIXED + 45)
+#undef TPM2_PT_VAR
+#define TPM2_PT_VAR                      (TPM2_PT_GROUP * 2)
+#undef TPM2_PT_PERMANENT
+#define TPM2_PT_PERMANENT                (TPM2_PT_VAR + 0)
+#undef TPM2_PT_STARTUP_CLEAR
+#define TPM2_PT_STARTUP_CLEAR            (TPM2_PT_VAR + 1)
+#undef TPM2_PT_TPM2_HR_NV_INDEX
+#define TPM2_PT_TPM2_HR_NV_INDEX         (TPM2_PT_VAR + 2)
+#undef TPM2_PT_HR_LOADED
+#define TPM2_PT_HR_LOADED                (TPM2_PT_VAR + 3)
+#undef TPM2_PT_HR_LOADED_AVAIL
+#define TPM2_PT_HR_LOADED_AVAIL          (TPM2_PT_VAR + 4)
+#undef TPM2_PT_HR_ACTIVE
+#define TPM2_PT_HR_ACTIVE                (TPM2_PT_VAR + 5)
+#undef TPM2_PT_HR_ACTIVE_AVAIL
+#define TPM2_PT_HR_ACTIVE_AVAIL          (TPM2_PT_VAR + 6)
+#undef TPM2_PT_TPM2_HR_TRANSIENT_AVAIL
+#define TPM2_PT_TPM2_HR_TRANSIENT_AVAIL  (TPM2_PT_VAR + 7)
+#undef TPM2_PT_TPM2_HR_PERSISTENT
+#define TPM2_PT_TPM2_HR_PERSISTENT       (TPM2_PT_VAR + 8)
+#undef TPM2_PT_TPM2_HR_PERSISTENT_AVAIL
+#define TPM2_PT_TPM2_HR_PERSISTENT_AVAIL (TPM2_PT_VAR + 9)
+#undef TPM2_PT_NV_COUNTERS
+#define TPM2_PT_NV_COUNTERS              (TPM2_PT_VAR + 10)
+#undef TPM2_PT_NV_COUNTERS_AVAIL
+#define TPM2_PT_NV_COUNTERS_AVAIL        (TPM2_PT_VAR + 11)
+#undef TPM2_PT_ALGORITHM_SET
+#define TPM2_PT_ALGORITHM_SET            (TPM2_PT_VAR + 12)
+#undef TPM2_PT_LOADED_CURVES
+#define TPM2_PT_LOADED_CURVES            (TPM2_PT_VAR + 13)
+#undef TPM2_PT_LOCKOUT_COUNTER
+#define TPM2_PT_LOCKOUT_COUNTER          (TPM2_PT_VAR + 14)
+#undef TPM2_PT_MAX_AUTH_FAIL
+#define TPM2_PT_MAX_AUTH_FAIL            (TPM2_PT_VAR + 15)
+#undef TPM2_PT_LOCKOUT_INTERVAL
+#define TPM2_PT_LOCKOUT_INTERVAL         (TPM2_PT_VAR + 16)
+#undef TPM2_PT_LOCKOUT_RECOVERY
+#define TPM2_PT_LOCKOUT_RECOVERY         (TPM2_PT_VAR + 17)
+#undef TPM2_PT_NV_WRITE_RECOVERY
+#define TPM2_PT_NV_WRITE_RECOVERY        (TPM2_PT_VAR + 18)
+#undef TPM2_PT_AUDIT_COUNTER_0
+#define TPM2_PT_AUDIT_COUNTER_0          (TPM2_PT_VAR + 19)
+#undef TPM2_PT_AUDIT_COUNTER_1
+#define TPM2_PT_AUDIT_COUNTER_1          (TPM2_PT_VAR + 20)
+#undef TPM2_PT_TPM2_PCR_FIRST
+#define TPM2_PT_TPM2_PCR_FIRST   0x00000000
+#undef TPM2_PT_PCR_SAVE
+#define TPM2_PT_PCR_SAVE         0x00000000
+#undef TPM2_PT_PCR_EXTEND_L0
+#define TPM2_PT_PCR_EXTEND_L0    0x00000001
+#undef TPM2_PT_PCR_RESET_L0
+#define TPM2_PT_PCR_RESET_L0     0x00000002
+#undef TPM2_PT_PCR_EXTEND_L1
+#define TPM2_PT_PCR_EXTEND_L1    0x00000003
+#undef TPM2_PT_PCR_RESET_L1
+#define TPM2_PT_PCR_RESET_L1     0x00000004
+#undef TPM2_PT_PCR_EXTEND_L2
+#define TPM2_PT_PCR_EXTEND_L2    0x00000005
+#undef TPM2_PT_PCR_RESET_L2
+#define TPM2_PT_PCR_RESET_L2     0x00000006
+#undef TPM2_PT_PCR_EXTEND_L3
+#define TPM2_PT_PCR_EXTEND_L3    0x00000007
+#undef TPM2_PT_PCR_RESET_L3
+#define TPM2_PT_PCR_RESET_L3     0x00000008
+#undef TPM2_PT_PCR_EXTEND_L4
+#define TPM2_PT_PCR_EXTEND_L4    0x00000009
+#undef TPM2_PT_PCR_RESET_L4
+#define TPM2_PT_PCR_RESET_L4     0x0000000A
+#undef TPM2_PT_PCR_NO_INCREMENT
+#define TPM2_PT_PCR_NO_INCREMENT 0x00000011
+#undef TPM2_PT_PCR_DRTM_RESET
+#define TPM2_PT_PCR_DRTM_RESET   0x00000012
+#undef TPM2_PT_PCR_POLICY
+#define TPM2_PT_PCR_POLICY       0x00000013
+#undef TPM2_PT_PCR_AUTH
+#define TPM2_PT_PCR_AUTH         0x00000014
+#undef TPM2_PT_TPM2_PCR_LAST
+#define TPM2_PT_TPM2_PCR_LAST    0x00000014
+#undef TPM2_PS_MAIN
+#define TPM2_PS_MAIN           0x00000000
+#undef TPM2_PS_PC
+#define TPM2_PS_PC             0x00000001
+#undef TPM2_PS_PDA
+#define TPM2_PS_PDA            0x00000002
+#undef TPM2_PS_CELL_PHONE
+#define TPM2_PS_CELL_PHONE     0x00000003
+#undef TPM2_PS_SERVER
+#define TPM2_PS_SERVER         0x00000004
+#undef TPM2_PS_PERIPHERAL
+#define TPM2_PS_PERIPHERAL     0x00000005
+#undef TPM2_PS_TSS
+#define TPM2_PS_TSS            0x00000006
+#undef TPM2_PS_STORAGE
+#define TPM2_PS_STORAGE        0x00000007
+#undef TPM2_PS_AUTHENTICATION
+#define TPM2_PS_AUTHENTICATION 0x00000008
+#undef TPM2_PS_EMBEDDED
+#define TPM2_PS_EMBEDDED       0x00000009
+#undef TPM2_PS_HARDCOPY
+#define TPM2_PS_HARDCOPY       0x0000000A
+#undef TPM2_PS_INFRASTRUCTURE
+#define TPM2_PS_INFRASTRUCTURE 0x0000000B
+#undef TPM2_PS_VIRTUALIZATION
+#define TPM2_PS_VIRTUALIZATION 0x0000000C
+#undef TPM2_PS_TNC
+#define TPM2_PS_TNC            0x0000000D
+#undef TPM2_PS_MULTI_TENANT
+#define TPM2_PS_MULTI_TENANT   0x0000000E
+#undef TPM2_PS_TC
+#define TPM2_PS_TC             0x0000000F
+#undef TPM2_HT_PCR
+#define TPM2_HT_PCR            0x00
+#undef TPM2_HT_NV_INDEX
+#define TPM2_HT_NV_INDEX       0x01
+#undef TPM2_HT_HMAC_SESSION
+#define TPM2_HT_HMAC_SESSION   0x02
+#undef TPM2_HT_LOADED_SESSION
+#define TPM2_HT_LOADED_SESSION 0x02
+#undef TPM2_HT_POLICY_SESSION
+#define TPM2_HT_POLICY_SESSION 0x03
+#undef TPM2_HT_SAVED_SESSION
+#define TPM2_HT_SAVED_SESSION  0x03
+#undef TPM2_HT_PERMANENT
+#define TPM2_HT_PERMANENT      0x40
+#undef TPM2_HT_TRANSIENT
+#define TPM2_HT_TRANSIENT      0x80
+#undef TPM2_HT_PERSISTENT
+#define TPM2_HT_PERSISTENT     0x81
+#undef TPM2_RH_FIRST
+#define TPM2_RH_FIRST       0x40000000
+#undef TPM2_RH_SRK
+#define TPM2_RH_SRK         0x40000000
+#undef TPM2_RH_OWNER
+#define TPM2_RH_OWNER       0x40000001
+#undef TPM2_RH_REVOKE
+#define TPM2_RH_REVOKE      0x40000002
+#undef TPM2_RH_TRANSPORT
+#define TPM2_RH_TRANSPORT   0x40000003
+#undef TPM2_RH_OPERATOR
+#define TPM2_RH_OPERATOR    0x40000004
+#undef TPM2_RH_ADMIN
+#define TPM2_RH_ADMIN       0x40000005
+#undef TPM2_RH_EK
+#define TPM2_RH_EK          0x40000006
+#undef TPM2_RH_NULL
+#define TPM2_RH_NULL        0x40000007
+#undef TPM2_RH_UNASSIGNED
+#define TPM2_RH_UNASSIGNED  0x40000008
+#undef TPM2_RS_PW
+#define TPM2_RS_PW          0x40000009
+#undef TPM2_RH_LOCKOUT
+#define TPM2_RH_LOCKOUT     0x4000000A
+#undef TPM2_RH_ENDORSEMENT
+#define TPM2_RH_ENDORSEMENT 0x4000000B
+#undef TPM2_RH_PLATFORM
+#define TPM2_RH_PLATFORM    0x4000000C
+#undef TPM2_RH_PLATFORM_NV
+#define TPM2_RH_PLATFORM_NV 0x4000000D
+#undef TPM2_RH_AUTH_00
+#define TPM2_RH_AUTH_00     0x40000010
+#undef TPM2_RH_AUTH_FF
+#define TPM2_RH_AUTH_FF     0x4000010F
+#undef TPM2_RH_LAST
+#define TPM2_RH_LAST        0x4000010F
+#undef TPM2_HR_HANDLE_MASK
+#define TPM2_HR_HANDLE_MASK       0x00FFFFFF
+#undef TPM2_HR_RANGE_MASK
+#define TPM2_HR_RANGE_MASK        0xFF000000
+#undef TPM2_HR_SHIFT
+#define TPM2_HR_SHIFT             24
+#undef TPM2_HR_PCR
+#define TPM2_HR_PCR               (TPM2_HT_PCR << TPM2_HR_SHIFT)
+#undef TPM2_HR_HMAC_SESSION
+#define TPM2_HR_HMAC_SESSION      (TPM2_HT_HMAC_SESSION << TPM2_HR_SHIFT)
+#undef TPM2_HR_POLICY_SESSION
+#define TPM2_HR_POLICY_SESSION    (TPM2_HT_POLICY_SESSION << TPM2_HR_SHIFT)
+#undef TPM2_HR_TRANSIENT
+#define TPM2_HR_TRANSIENT         (TPM2_HT_TRANSIENT << TPM2_HR_SHIFT)
+#undef TPM2_HR_PERSISTENT
+#define TPM2_HR_PERSISTENT        (TPM2_HT_PERSISTENT << TPM2_HR_SHIFT)
+#undef TPM2_HR_NV_INDEX
+#define TPM2_HR_NV_INDEX          (TPM2_HT_NV_INDEX << TPM2_HR_SHIFT)
+#undef TPM2_HR_PERMANENT
+#define TPM2_HR_PERMANENT         (TPM2_HT_PERMANENT << TPM2_HR_SHIFT)
+#undef TPM2_PCR_FIRST
+#define TPM2_PCR_FIRST            (TPM2_HR_PCR + 0)
+#undef TPM2_PCR_LAST
+#define TPM2_PCR_LAST             (TPM2_PCR_FIRST + TPM2_MAX_PCRS - 1)
+#undef TPM2_HMAC_SESSION_FIRST
+#define TPM2_HMAC_SESSION_FIRST   (TPM2_HR_HMAC_SESSION + 0)
+#undef TPM2_HMAC_SESSION_LAST
+#define TPM2_HMAC_SESSION_LAST    (TPM2_HMAC_SESSION_FIRST + 0x00fffffe)
+#undef TPM2_LOADED_SESSION_FIRST
+#define TPM2_LOADED_SESSION_FIRST TPM2_HMAC_SESSION_FIRST
+#undef TPM2_LOADED_SESSION_LAST
+#define TPM2_LOADED_SESSION_LAST  TPM2_HMAC_SESSION_LAST
+#undef TPM2_POLICY_SESSION_FIRST
+#define TPM2_POLICY_SESSION_FIRST (TPM2_HR_POLICY_SESSION + 0)
+#undef TPM2_POLICY_SESSION_LAST
+#define TPM2_POLICY_SESSION_LAST  (TPM2_POLICY_SESSION_FIRST + 0x00fffffe)
+#undef TPM2_TRANSIENT_FIRST
+#define TPM2_TRANSIENT_FIRST      (TPM2_HR_TRANSIENT + 0)
+#undef TPM2_ACTIVE_SESSION_FIRST
+#define TPM2_ACTIVE_SESSION_FIRST TPM2_POLICY_SESSION_FIRST
+#undef TPM2_ACTIVE_SESSION_LAST
+#define TPM2_ACTIVE_SESSION_LAST  TPM2_POLICY_SESSION_LAST
+#undef TPM2_TRANSIENT_LAST
+#define TPM2_TRANSIENT_LAST       (TPM2_TRANSIENT_FIRST + 0x00fffffe)
+#undef TPM2_PERSISTENT_FIRST
+#define TPM2_PERSISTENT_FIRST     (TPM2_HR_PERSISTENT + 0)
+#undef TPM2_PERSISTENT_LAST
+#define TPM2_PERSISTENT_LAST      (TPM2_PERSISTENT_FIRST + 0x00FFFFFF)
+#undef TPM2_PLATFORM_PERSISTENT
+#define TPM2_PLATFORM_PERSISTENT  (TPM2_PERSISTENT_FIRST + 0x00800000)
+#undef TPM2_NV_INDEX_FIRST
+#define TPM2_NV_INDEX_FIRST       (TPM2_HR_NV_INDEX + 0)
+#undef TPM2_NV_INDEX_LAST
+#define TPM2_NV_INDEX_LAST        (TPM2_NV_INDEX_FIRST + 0x00FFFFFF)
+#undef TPM2_PERMANENT_FIRST
+#define TPM2_PERMANENT_FIRST      TPM2_RH_FIRST
+#undef TPM2_PERMANENT_LAST
+#define TPM2_PERMANENT_LAST       TPM2_RH_LAST
+#undef TPMA_ALGORITHM_ASYMMETRIC
+#define TPMA_ALGORITHM_ASYMMETRIC     0x00000001
+#undef TPMA_ALGORITHM_SYMMETRIC
+#define TPMA_ALGORITHM_SYMMETRIC      0x00000002
+#undef TPMA_ALGORITHM_HASH
+#define TPMA_ALGORITHM_HASH           0x00000004
+#undef TPMA_ALGORITHM_OBJECT
+#define TPMA_ALGORITHM_OBJECT         0x00000008
+#undef TPMA_ALGORITHM_RESERVED1_MASK
+#define TPMA_ALGORITHM_RESERVED1_MASK 0x000000F0
+#undef TPMA_ALGORITHM_SIGNING
+#define TPMA_ALGORITHM_SIGNING        0x00000100
+#undef TPMA_ALGORITHM_ENCRYPTING
+#define TPMA_ALGORITHM_ENCRYPTING     0x00000200
+#undef TPMA_ALGORITHM_METHOD
+#define TPMA_ALGORITHM_METHOD         0x00000400
+#undef TPMA_ALGORITHM_RESERVED2_MASK
+#define TPMA_ALGORITHM_RESERVED2_MASK 0xFFFFF800
+#undef TPMA_OBJECT_RESERVED1_MASK
+#define TPMA_OBJECT_RESERVED1_MASK       0x00000001
+#undef TPMA_OBJECT_FIXEDTPM
+#define TPMA_OBJECT_FIXEDTPM             0x00000002
+#undef TPMA_OBJECT_STCLEAR
+#define TPMA_OBJECT_STCLEAR              0x00000004
+#undef TPMA_OBJECT_RESERVED2_MASK
+#define TPMA_OBJECT_RESERVED2_MASK       0x00000008
+#undef TPMA_OBJECT_FIXEDPARENT
+#define TPMA_OBJECT_FIXEDPARENT          0x00000010
+#undef TPMA_OBJECT_SENSITIVEDATAORIGIN
+#define TPMA_OBJECT_SENSITIVEDATAORIGIN  0x00000020
+#undef TPMA_OBJECT_USERWITHAUTH
+#define TPMA_OBJECT_USERWITHAUTH         0x00000040
+#undef TPMA_OBJECT_ADMINWITHPOLICY
+#define TPMA_OBJECT_ADMINWITHPOLICY      0x00000080
+#undef TPMA_OBJECT_RESERVED3_MASK
+#define TPMA_OBJECT_RESERVED3_MASK       0x00000300
+#undef TPMA_OBJECT_NODA
+#define TPMA_OBJECT_NODA                 0x00000400
+#undef TPMA_OBJECT_ENCRYPTEDDUPLICATION
+#define TPMA_OBJECT_ENCRYPTEDDUPLICATION 0x00000800
+#undef TPMA_OBJECT_RESERVED4_MASK
+#define TPMA_OBJECT_RESERVED4_MASK       0x0000F000
+#undef TPMA_OBJECT_RESTRICTED
+#define TPMA_OBJECT_RESTRICTED           0x00010000
+#undef TPMA_OBJECT_DECRYPT
+#define TPMA_OBJECT_DECRYPT              0x00020000
+#undef TPMA_OBJECT_SIGN_ENCRYPT
+#define TPMA_OBJECT_SIGN_ENCRYPT         0x00040000
+#undef TPMA_OBJECT_RESERVED5_MASK
+#define TPMA_OBJECT_RESERVED5_MASK       0xFFF80000
+#undef TPMA_SESSION_CONTINUESESSION
+#define TPMA_SESSION_CONTINUESESSION 0x00000001
+#undef TPMA_SESSION_AUDITEXCLUSIVE
+#define TPMA_SESSION_AUDITEXCLUSIVE  0x00000002
+#undef TPMA_SESSION_AUDITRESET
+#define TPMA_SESSION_AUDITRESET      0x00000004
+#undef TPMA_SESSION_RESERVED1_MASK
+#define TPMA_SESSION_RESERVED1_MASK  0x00000018
+#undef TPMA_SESSION_DECRYPT
+#define TPMA_SESSION_DECRYPT         0x00000020
+#undef TPMA_SESSION_ENCRYPT
+#define TPMA_SESSION_ENCRYPT         0x00000040
+#undef TPMA_SESSION_AUDIT
+#define TPMA_SESSION_AUDIT           0x00000080
+#undef TPMA_LOCALITY_TPM2_LOC_ZERO
+#define TPMA_LOCALITY_TPM2_LOC_ZERO  0x00000001
+#undef TPMA_LOCALITY_TPM2_LOC_ONE
+#define TPMA_LOCALITY_TPM2_LOC_ONE   0x00000002
+#undef TPMA_LOCALITY_TPM2_LOC_TWO
+#define TPMA_LOCALITY_TPM2_LOC_TWO   0x00000004
+#undef TPMA_LOCALITY_TPM2_LOC_THREE
+#define TPMA_LOCALITY_TPM2_LOC_THREE 0x00000008
+#undef TPMA_LOCALITY_TPM2_LOC_FOUR
+#define TPMA_LOCALITY_TPM2_LOC_FOUR  0x00000010
+#undef TPMA_LOCALITY_EXTENDED_MASK
+#define TPMA_LOCALITY_EXTENDED_MASK  0x000000E0
+#undef TPMA_PERMANENT_OWNERAUTHSET
+#define TPMA_PERMANENT_OWNERAUTHSET        0x00000001
+#undef TPMA_PERMANENT_ENDORSEMENTAUTHSET
+#define TPMA_PERMANENT_ENDORSEMENTAUTHSET  0x00000002
+#undef TPMA_PERMANENT_LOCKOUTAUTHSET
+#define TPMA_PERMANENT_LOCKOUTAUTHSET      0x00000004
+#undef TPMA_PERMANENT_RESERVED1_MASK
+#define TPMA_PERMANENT_RESERVED1_MASK      0x000000F8
+#undef TPMA_PERMANENT_DISABLECLEAR
+#define TPMA_PERMANENT_DISABLECLEAR        0x00000100
+#undef TPMA_PERMANENT_INLOCKOUT
+#define TPMA_PERMANENT_INLOCKOUT           0x00000200
+#undef TPMA_PERMANENT_TPMGENERATEDEPS
+#define TPMA_PERMANENT_TPMGENERATEDEPS     0x00000400
+#undef TPMA_PERMANENT_RESERVED2_MASK
+#define TPMA_PERMANENT_RESERVED2_MASK      0xFFFFF800
+#undef TPMA_STARTUP_CLEAR_PHENABLE
+#define TPMA_STARTUP_CLEAR_PHENABLE        0x00000001
+#undef TPMA_STARTUP_CLEAR_SHENABLE
+#define TPMA_STARTUP_CLEAR_SHENABLE        0x00000002
+#undef TPMA_STARTUP_CLEAR_EHENABLE
+#define TPMA_STARTUP_CLEAR_EHENABLE        0x00000004
+#undef TPMA_STARTUP_CLEAR_PHENABLENV
+#define TPMA_STARTUP_CLEAR_PHENABLENV      0x00000008
+#undef TPMA_STARTUP_CLEAR_RESERVED1_MASK
+#define TPMA_STARTUP_CLEAR_RESERVED1_MASK  0x7FFFFFF0
+#undef TPMA_STARTUP_CLEAR_ORDERLY
+#define TPMA_STARTUP_CLEAR_ORDERLY         0x80000000
+#undef TPMA_MEMORY_SHAREDRAM
+#define TPMA_MEMORY_SHAREDRAM              0x00000001
+#undef TPMA_MEMORY_SHAREDNV
+#define TPMA_MEMORY_SHAREDNV               0x00000002
+#undef TPMA_MEMORY_OBJECTCOPIEDTORAM
+#define TPMA_MEMORY_OBJECTCOPIEDTORAM      0x00000004
+#undef TPMA_MEMORY_RESERVED1_MASK
+#define TPMA_MEMORY_RESERVED1_MASK         0xFFFFFFF8
+#undef TPMA_CC_COMMANDINDEX_MASK
+#define TPMA_CC_COMMANDINDEX_MASK  0x0000FFFF
+#undef TPMA_CC_RESERVED1_MASK
+#define TPMA_CC_RESERVED1_MASK     0x003F0000
+#undef TPMA_CC_NV
+#define TPMA_CC_NV                 0x00400000
+#undef TPMA_CC_EXTENSIVE
+#define TPMA_CC_EXTENSIVE          0x00800000
+#undef TPMA_CC_FLUSHED
+#define TPMA_CC_FLUSHED            0x01000000
+#undef TPMA_CC_CHANDLES_MASK
+#define TPMA_CC_CHANDLES_MASK      0x0E000000
+#undef TPMA_CC_RHANDLE
+#define TPMA_CC_RHANDLE            0x10000000
+#undef TPMA_CC_V
+#define TPMA_CC_V                  0x20000000
+#undef TPMA_CC_RES_MASK
+#define TPMA_CC_RES_MASK           0xC0000000
+#undef TPMA_MODES_FIPS_140_2
+#define TPMA_MODES_FIPS_140_2      0x00000001
+#undef TPMA_MODES_RESERVED1_MASK
+#define TPMA_MODES_RESERVED1_MASK  0xFFFFFFFE
+#undef TPM2_NO
+#define TPM2_NO  0
+#undef TPM2_YES
+#define TPM2_YES 1
+#undef TPM2_NV_INDEX_INDEX_MASK
+#define TPM2_NV_INDEX_INDEX_MASK  0x00FFFFFF
+#undef TPM2_NV_INDEX_RH_NV_MASK
+#define TPM2_NV_INDEX_RH_NV_MASK  0xFF000000
+#undef TPM2_NT_ORDINARY
+#define TPM2_NT_ORDINARY 0x0
+#undef TPM2_NT_COUNTER
+#define TPM2_NT_COUNTER  0x1
+#undef TPM2_NT_BITS
+#define TPM2_NT_BITS     0x2
+#undef TPM2_NT_EXTEND
+#define TPM2_NT_EXTEND   0x4
+#undef TPM2_NT_PIN_FAIL
+#define TPM2_NT_PIN_FAIL 0x8
+#undef TPM2_NT_PIN_PASS
+#define TPM2_NT_PIN_PASS 0x9
+#undef TPMA_NV_PPWRITE
+#define TPMA_NV_PPWRITE        0x00000001
+#undef TPMA_NV_OWNERWRITE
+#define TPMA_NV_OWNERWRITE     0x00000002
+#undef TPMA_NV_AUTHWRITE
+#define TPMA_NV_AUTHWRITE      0x00000004
+#undef TPMA_NV_POLICYWRITE
+#define TPMA_NV_POLICYWRITE    0x00000008
+#undef TPMA_NV_TPM2_NT_MASK
+#define TPMA_NV_TPM2_NT_MASK   0x000000F0
+#undef TPMA_NV_RESERVED1_MASK
+#define TPMA_NV_RESERVED1_MASK 0x00000300
+#undef TPMA_NV_POLICY_DELETE
+#define TPMA_NV_POLICY_DELETE  0x00000400
+#undef TPMA_NV_WRITELOCKED
+#define TPMA_NV_WRITELOCKED    0x00000800
+#undef TPMA_NV_WRITEALL
+#define TPMA_NV_WRITEALL       0x00001000
+#undef TPMA_NV_WRITEDEFINE
+#define TPMA_NV_WRITEDEFINE    0x00002000
+#undef TPMA_NV_WRITE_STCLEAR
+#define TPMA_NV_WRITE_STCLEAR  0x00004000
+#undef TPMA_NV_GLOBALLOCK
+#define TPMA_NV_GLOBALLOCK     0x00008000
+#undef TPMA_NV_PPREAD
+#define TPMA_NV_PPREAD         0x00010000
+#undef TPMA_NV_OWNERREAD
+#define TPMA_NV_OWNERREAD      0x00020000
+#undef TPMA_NV_AUTHREAD
+#define TPMA_NV_AUTHREAD       0x00040000
+#undef TPMA_NV_POLICYREAD
+#define TPMA_NV_POLICYREAD     0x00080000
+#undef TPMA_NV_RESERVED2_MASK
+#define TPMA_NV_RESERVED2_MASK 0x01F00000
+#undef TPMA_NV_NO_DA
+#define TPMA_NV_NO_DA          0x02000000
+#undef TPMA_NV_ORDERLY
+#define TPMA_NV_ORDERLY        0x04000000
+#undef TPMA_NV_CLEAR_STCLEAR
+#define TPMA_NV_CLEAR_STCLEAR  0x08000000
+#undef TPMA_NV_READLOCKED
+#define TPMA_NV_READLOCKED     0x10000000
+#undef TPMA_NV_WRITTEN
+#define TPMA_NV_WRITTEN        0x20000000
+#undef TPMA_NV_PLATFORMCREATE
+#define TPMA_NV_PLATFORMCREATE 0x40000000
+#undef TPMA_NV_READ_STCLEAR
+#define TPMA_NV_READ_STCLEAR   0x80000000
+#undef TPM_AT_ANY
+#define TPM_AT_ANY             0x00000000
+#undef TPM_AT_ERROR
+#define TPM_AT_ERROR           0x00000001
+#undef TPM_AT_PV1
+#define TPM_AT_PV1             0x00000002
+
+/* Error codes */
+#undef TSS2_RC_SUCCESS
+#define TSS2_RC_SUCCESS 0
+
+#undef TSS2_RC_LAYER
+#define TSS2_RC_LAYER(level)     (level << TSS2_RC_LAYER_SHIFT)
+#define TSS2_RC_LAYER_MASK       TSS2_RC_LAYER(0xff)
+#define TSS2_TPM_RC_LAYER        TSS2_RC_LAYER(0)
+#define TSS2_FEATURE_RC_LAYER    TSS2_RC_LAYER(6)
+#define TSS2_ESAPI_RC_LAYER      TSS2_RC_LAYER(7)
+#define TSS2_SYS_RC_LAYER        TSS2_RC_LAYER(8)
+#define TSS2_MU_RC_LAYER         TSS2_RC_LAYER(9)
+#define TSS2_TCTI_RC_LAYER       TSS2_RC_LAYER(10)
+#define TSS2_RESMGR_RC_LAYER     TSS2_RC_LAYER(11)
+#define TSS2_RESMGR_TPM_RC_LAYER TSS2_RC_LAYER(12)
+
+#undef TSS2_TCTI_RC_GENERAL_FAILURE
+#define TSS2_TCTI_RC_GENERAL_FAILURE            (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_GENERAL_FAILURE)
+#undef TSS2_TCTI_RC_NOT_IMPLEMENTED
+#define TSS2_TCTI_RC_NOT_IMPLEMENTED            (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_NOT_IMPLEMENTED)
+#undef TSS2_TCTI_RC_BAD_CONTEXT
+#define TSS2_TCTI_RC_BAD_CONTEXT                (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_BAD_CONTEXT)
+#undef TSS2_TCTI_RC_ABI_MISMATCH
+#define TSS2_TCTI_RC_ABI_MISMATCH               (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_ABI_MISMATCH)
+#undef TSS2_TCTI_RC_BAD_REFERENCE
+#define TSS2_TCTI_RC_BAD_REFERENCE              (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_BAD_REFERENCE)
+#undef TSS2_TCTI_RC_INSUFFICIENT_BUFFER
+#define TSS2_TCTI_RC_INSUFFICIENT_BUFFER        (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_BUFFER)
+#undef TSS2_TCTI_RC_BAD_SEQUENCE
+#define TSS2_TCTI_RC_BAD_SEQUENCE               (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_BAD_SEQUENCE)
+#undef TSS2_TCTI_RC_NO_CONNECTION
+#define TSS2_TCTI_RC_NO_CONNECTION              (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_NO_CONNECTION)
+#undef TSS2_TCTI_RC_TRY_AGAIN
+#define TSS2_TCTI_RC_TRY_AGAIN                  (TSS2_TCTI_RC_LAYER | SS2_BASE_RC_TRY_AGAIN)
+#undef TSS2_TCTI_RC_IO_ERROR
+#define TSS2_TCTI_RC_IO_ERROR                   (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_IO_ERROR)
+#undef TSS2_TCTI_RC_BAD_VALUE
+#define TSS2_TCTI_RC_BAD_VALUE                  (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_BAD_VALUE)
+#undef TSS2_TCTI_RC_NOT_PERMITTED
+#define TSS2_TCTI_RC_NOT_PERMITTED              (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_NOT_PERMITTED)
+#undef TSS2_TCTI_RC_MALFORMED_RESPONSE
+#define TSS2_TCTI_RC_MALFORMED_RESPONSE         (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_MALFORMED_RESPONSE)
+#undef TSS2_TCTI_RC_NOT_SUPPORTED
+#define TSS2_TCTI_RC_NOT_SUPPORTED              (TSS2_TCTI_RC_LAYER | TSS2_BASE_RC_NOT_SUPPORTED)
+#undef TSS2_SYS_RC_GENERAL_FAILURE
+#define TSS2_SYS_RC_GENERAL_FAILURE             (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_GENERAL_FAILURE)
+#undef TSS2_SYS_RC_ABI_MISMATCH
+#define TSS2_SYS_RC_ABI_MISMATCH                (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_ABI_MISMATCH)
+#undef TSS2_SYS_RC_BAD_REFERENCE
+#define TSS2_SYS_RC_BAD_REFERENCE               (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_BAD_REFERENCE)
+#undef TSS2_SYS_RC_INSUFFICIENT_BUFFER
+#define TSS2_SYS_RC_INSUFFICIENT_BUFFER         (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_BUFFER)
+#undef TSS2_SYS_RC_BAD_SEQUENCE
+#define TSS2_SYS_RC_BAD_SEQUENCE                (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_BAD_SEQUENCE)
+#undef TSS2_SYS_RC_BAD_VALUE
+#define TSS2_SYS_RC_BAD_VALUE                   (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_BAD_VALUE)
+#undef TSS2_SYS_RC_INVALID_SESSIONS
+#define TSS2_SYS_RC_INVALID_SESSIONS            (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_INVALID_SESSIONS)
+#undef TSS2_SYS_RC_NO_DECRYPT_PARAM
+#define TSS2_SYS_RC_NO_DECRYPT_PARAM            (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_NO_DECRYPT_PARAM)
+#undef TSS2_SYS_RC_NO_ENCRYPT_PARAM
+#define TSS2_SYS_RC_NO_ENCRYPT_PARAM            (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_NO_ENCRYPT_PARAM)
+#undef TSS2_SYS_RC_BAD_SIZE
+#define TSS2_SYS_RC_BAD_SIZE                    (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_BAD_SIZE)
+#undef TSS2_SYS_RC_MALFORMED_RESPONSE
+#define TSS2_SYS_RC_MALFORMED_RESPONSE          (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_MALFORMED_RESPONSE)
+#undef TSS2_SYS_RC_INSUFFICIENT_CONTEXT
+#define TSS2_SYS_RC_INSUFFICIENT_CONTEXT        (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_CONTEXT)
+#undef TSS2_SYS_RC_INSUFFICIENT_RESPONSE
+#define TSS2_SYS_RC_INSUFFICIENT_RESPONSE       (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_RESPONSE)
+#undef TSS2_SYS_RC_INCOMPATIBLE_TCTI
+#define TSS2_SYS_RC_INCOMPATIBLE_TCTI           (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_INCOMPATIBLE_TCTI)
+#undef TSS2_SYS_RC_BAD_TCTI_STRUCTURE
+#define TSS2_SYS_RC_BAD_TCTI_STRUCTURE          (TSS2_SYS_RC_LAYER | TSS2_BASE_RC_BAD_TCTI_STRUCTURE)
+#undef TSS2_MU_RC_GENERAL_FAILURE
+#define TSS2_MU_RC_GENERAL_FAILURE              (TSS2_MU_RC_LAYER | TSS2_BASE_RC_GENERAL_FAILURE)
+#undef TSS2_MU_RC_BAD_REFERENCE
+#define TSS2_MU_RC_BAD_REFERENCE                (TSS2_MU_RC_LAYER | TSS2_BASE_RC_BAD_REFERENCE)
+#undef TSS2_MU_RC_BAD_SIZE
+#define TSS2_MU_RC_BAD_SIZE                     (TSS2_MU_RC_LAYER | TSS2_BASE_RC_BAD_SIZE)
+#undef TSS2_MU_RC_BAD_VALUE
+#define TSS2_MU_RC_BAD_VALUE                    (TSS2_MU_RC_LAYER | TSS2_BASE_RC_BAD_VALUE)
+#undef TSS2_MU_RC_INSUFFICIENT_BUFFER
+#define TSS2_MU_RC_INSUFFICIENT_BUFFER          (TSS2_MU_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_BUFFER)
+#undef TSS2_ESYS_RC_GENERAL_FAILURE
+#define TSS2_ESYS_RC_GENERAL_FAILURE             (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_GENERAL_FAILURE)
+#undef TSS2_ESYS_RC_NOT_IMPLEMENTED
+#define TSS2_ESYS_RC_NOT_IMPLEMENTED             (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_NOT_IMPLEMENTED)
+#undef TSS2_ESYS_RC_ABI_MISMATCH
+#define TSS2_ESYS_RC_ABI_MISMATCH                (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_ABI_MISMATCH)
+#undef TSS2_ESYS_RC_BAD_REFERENCE
+#define TSS2_ESYS_RC_BAD_REFERENCE               (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_BAD_REFERENCE)
+#undef TSS2_ESYS_RC_INSUFFICIENT_BUFFER
+#define TSS2_ESYS_RC_INSUFFICIENT_BUFFER         (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_BUFFER)
+#undef TSS2_ESYS_RC_BAD_SEQUENCE
+#define TSS2_ESYS_RC_BAD_SEQUENCE                (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_BAD_SEQUENCE)
+#undef TSS2_ESYS_RC_INVALID_SESSIONS
+#define TSS2_ESYS_RC_INVALID_SESSIONS            (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_INVALID_SESSIONS)
+#undef TSS2_ESYS_RC_TRY_AGAIN
+#define TSS2_ESYS_RC_TRY_AGAIN                   (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_TRY_AGAIN)
+#undef TSS2_ESYS_RC_IO_ERROR
+#define TSS2_ESYS_RC_IO_ERROR                    (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_IO_ERROR)
+#undef TSS2_ESYS_RC_BAD_VALUE
+#define TSS2_ESYS_RC_BAD_VALUE                   (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_BAD_VALUE)
+#undef TSS2_ESYS_RC_NO_DECRYPT_PARAM
+#define TSS2_ESYS_RC_NO_DECRYPT_PARAM            (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_NO_DECRYPT_PARAM)
+#undef TSS2_ESYS_RC_NO_ENCRYPT_PARAM
+#define TSS2_ESYS_RC_NO_ENCRYPT_PARAM            (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_NO_ENCRYPT_PARAM)
+#undef TSS2_ESYS_RC_BAD_SIZE
+#define TSS2_ESYS_RC_BAD_SIZE                    (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_BAD_SIZE)
+#undef TSS2_ESYS_RC_MALFORMED_RESPONSE
+#define TSS2_ESYS_RC_MALFORMED_RESPONSE          (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_MALFORMED_RESPONSE)
+#undef TSS2_ESYS_RC_INSUFFICIENT_CONTEXT
+#define TSS2_ESYS_RC_INSUFFICIENT_CONTEXT        (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_CONTEXT)
+#undef TSS2_ESYS_RC_INSUFFICIENT_RESPONSE
+#define TSS2_ESYS_RC_INSUFFICIENT_RESPONSE       (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_INSUFFICIENT_RESPONSE)
+#undef TSS2_ESYS_RC_INCOMPATIBLE_TCTI
+#define TSS2_ESYS_RC_INCOMPATIBLE_TCTI           (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_INCOMPATIBLE_TCTI)
+#undef TSS2_ESYS_RC_BAD_TCTI_STRUCTURE
+#define TSS2_ESYS_RC_BAD_TCTI_STRUCTURE          (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_BAD_TCTI_STRUCTURE)
+#undef TSS2_ESYS_RC_MEMORY
+#define TSS2_ESYS_RC_MEMORY                      (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_MEMORY)
+#undef TSS2_ESYS_RC_BAD_TR
+#define TSS2_ESYS_RC_BAD_TR                      (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_BAD_TR)
+#undef TSS2_ESYS_RC_MULTIPLE_DECRYPT_SESSIONS
+#define TSS2_ESYS_RC_MULTIPLE_DECRYPT_SESSIONS   (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_MULTIPLE_DECRYPT_SESSIONS)
+#undef TSS2_ESYS_RC_MULTIPLE_ENCRYPT_SESSIONS
+#define TSS2_ESYS_RC_MULTIPLE_ENCRYPT_SESSIONS   (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_MULTIPLE_ENCRYPT_SESSIONS)
+#undef TSS2_ESYS_RC_RSP_AUTH_FAILED
+#define TSS2_ESYS_RC_RSP_AUTH_FAILED             (TSS2_ESAPI_RC_LAYER | TSS2_BASE_RC_RSP_AUTH_FAILED)
