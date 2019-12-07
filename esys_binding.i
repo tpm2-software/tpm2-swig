@@ -12,6 +12,7 @@
 %}
 
 %include "tpm2_types.i"
+%include "mu_binding.i"
 
 %pointer_class(ESYS_TR, ESYS_TR_PTR);
 %pointer_functions(ESYS_TR *, ESYS_TR_PTR_PTR);
