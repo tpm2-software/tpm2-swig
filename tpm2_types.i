@@ -21,7 +21,7 @@ extern const char *Tss2_RC_Decode(TSS2_RC rc);
 %pointer_functions(TPMI_YES_NO, TPMI_YES_NO_PTR);
 
 /* Gernate the following with:
- * $ grep -E '} .*;' $(pkg-config --cflags-only-I tss2-esys | sed -e 's/-I//g')/tss2/tss2_tpm2_types.h | sed -e 's/} //g' -e 's/;//g' | sed -e 's#.*#%sizeof(&);\n%pointer_functions(&, &_PTR);\n%pointer_functions(& *, &_PTR_PTR);#g' > tpm2_pyesys/swig/tpm2_structures.i
+ * $ grep -E '} .*;' "$(pkg-config --cflags-only-I tss2-esys | sed -e 's/-I//g' -e 's/ //g')/tss2/tss2_tpm2_types.h" | sed -e 's/} //g' -e 's/;//g' | sed -e 's#.*#%sizeof(&);\n%pointer_functions(&, &_PTR);\n%pointer_functions(& *, &_PTR_PTR);#g' > tpm2_pytss/swig/tpm2_structures.i
  */
 /* BEGIN GENERATED POINTER_CLASSES */
 %include "tpm2_structures.i"
