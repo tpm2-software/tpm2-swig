@@ -17,6 +17,11 @@
 
 %pointer_functions(struct FAPI_CONTEXT *, fapi_ctx_ptr);
 
+%sizeof(FAPI_POLL_HANDLE);
+%array_class(FAPI_POLL_HANDLE, FAPI_POLL_HANDLE_ARRAY);
+%pointer_functions(FAPI_POLL_HANDLE, FAPI_POLL_HANDLE_PTR);
+%pointer_functions(FAPI_POLL_HANDLE *, FAPI_POLL_HANDLE_PTR_PTR);
+
 /* The Python Bindings will not work without this. */
 %feature("autodoc", "1");
 

@@ -40,6 +40,13 @@ typedef int32_t             INT32;
 typedef uint64_t            UINT64;
 typedef int64_t             INT64;
 
+%pointer_functions(void *, VOID_PTR_PTR);
+
+%pointer_functions(size_t, SIZE_T_PTR);
+%pointer_functions(size_t *, SIZE_T_PTR_PTR);
+
+%pointer_functions(char, CHAR_PTR);
+%pointer_functions(char *, CHAR_PTR_PTR);
 %pointer_functions(UINT8, UINT8_PTR);
 %pointer_functions(UINT8 *, UINT8_PTR_PTR);
 
