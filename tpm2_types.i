@@ -50,6 +50,7 @@ typedef int64_t             INT64;
 %pointer_functions(UINT8, UINT8_PTR);
 %pointer_functions(UINT8 *, UINT8_PTR_PTR);
 
+%array_class(UINT32, UINT32_ARRAY);
 %pointer_class(uint32_t, uint32_t_PTR);
 %pointer_functions(uint32_t_PTR, uint32_t_PTR_PTR);
 %pointer_class(UINT32, UINT32_PTR);
@@ -58,6 +59,7 @@ typedef int64_t             INT64;
 %pointer_functions(uint16_t_PTR, uint16_t_PTR_PTR);
 %pointer_class(UINT16, UINT16_PTR);
 %pointer_functions(UINT16_PTR, UINT16_PTR_PTR);
+%array_class(UINT16, UINT16_ARRAY);
 %array_class(BYTE, ByteArray);
 
 #define TSS2_TCTI_TIMEOUT_BLOCK    -1
