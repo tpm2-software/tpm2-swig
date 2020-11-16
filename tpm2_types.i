@@ -49,6 +49,7 @@ typedef int64_t             INT64;
 %pointer_functions(char *, CHAR_PTR_PTR);
 %pointer_functions(UINT8, UINT8_PTR);
 %pointer_functions(UINT8 *, UINT8_PTR_PTR);
+%array_class(UINT8, UINT8_ARRAY);
 
 %array_class(UINT32, UINT32_ARRAY);
 %pointer_class(uint32_t, uint32_t_PTR);
